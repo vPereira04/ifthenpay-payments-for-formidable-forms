@@ -1,0 +1,378 @@
+# Copyright (C) 2026 ifthenpay
+# This file is distributed under the GPL v3.
+msgid ""
+msgstr ""
+"Project-Id-Version: ifthenpay | Payments for Formidable Forms 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ifthenpay-payments-for-formidable-forms\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-17T08:19:16+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: ifthenpay-payments-for-formidable-forms\n"
+
+#. Plugin Name of the plugin
+#: ifthenpay-payments-for-formidable-forms.php
+msgid "ifthenpay | Payments for Formidable Forms"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: ifthenpay-payments-for-formidable-forms.php
+msgid "https://github.com/vPereira04/ifthenpay-payments-for-formidable-forms"
+msgstr ""
+
+#. Description of the plugin
+#: ifthenpay-payments-for-formidable-forms.php
+msgid "ifthenpay Pay by Link integration for Formidable Forms. Requires the free Formidable Forms plugin (with its bundled payments module)."
+msgstr ""
+
+#. Author of the plugin
+#: ifthenpay-payments-for-formidable-forms.php
+#: src/Admin/SettingsField.php:130
+#: src/Frontend/PaymentSelector.php:133
+msgid "ifthenpay"
+msgstr ""
+
+#. Author URI of the plugin
+#: ifthenpay-payments-for-formidable-forms.php
+msgid "https://ifthenpay.com/"
+msgstr ""
+
+#: classes/class-frm-ifthenpay-actions-controller.php:219
+msgid "Payment"
+msgstr ""
+
+#: classes/class-frm-ifthenpay-payment-action.php:58
+msgid "Payment gateway"
+msgstr ""
+
+#: ifthenpay-payments-for-formidable-forms.php:102
+msgid "ifthenpay Payments for Formidable Forms requires the free Formidable Forms plugin to be installed and active."
+msgstr ""
+
+#: ifthenpay-payments-for-formidable-forms.php:111
+msgid "ifthenpay Payments for Formidable Forms requires Formidable's free bundled payments module. It could not be found (the paid Formidable \"Payments\" add-on, if active, is not currently supported by this integration)."
+msgstr ""
+
+#: src/Admin/SettingsField.php:124
+msgid "Connecting…"
+msgstr ""
+
+#: src/Admin/SettingsField.php:125
+msgid "Requesting…"
+msgstr ""
+
+#: src/Admin/SettingsField.php:126
+#: src/Admin/views/methods-table-rows.php:90
+#: src/Ajax/Controller.php:335
+msgid "Requested"
+msgstr ""
+
+#: src/Admin/SettingsField.php:127
+msgid "Loading payment methods…"
+msgstr ""
+
+#: src/Admin/SettingsField.php:128
+#: src/Admin/views/settings-tab.php:104
+msgid "Select a Gateway Key to load its payment methods."
+msgstr ""
+
+#: src/Admin/SettingsField.php:129
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: src/Admin/SettingsField.php:131
+msgid "Saving…"
+msgstr ""
+
+#: src/Admin/SettingsField.php:195
+msgid "Ifthenpay Extras"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:20
+msgid "Shown once the payer is sent back from the ifthenpay hosted page. Message fields support Formidable field shortcodes like [21]; Redirect/Open-in-a-New-Tab URLs are plain URLs only. \"Open in a New Tab\" shows the message here while also opening the URL in a new tab — handy for pointing Payment Pending to the same \"Thank you\" page as Payment Received, with its own wording for the still-confirming case. For Payment Received specifically: a form with its own native \"On Submit → Redirect to URL\" action always keeps using that instead of anything set here; otherwise \"Show Message\" shows the form's own native message when it has one, while \"Open in a New Tab\" always uses the message configured here."
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:23
+msgid "Payment Canceled and Payment Failed are not configurable: the payer is always sent back to the form and shown a fixed message."
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:27
+msgid "Show Message"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:28
+msgid "Redirect to URL"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:29
+msgid "Open in a New Tab"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:41
+msgid "Payment Received"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:48
+msgid "Payment Pending"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:78
+msgid "Message"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:82
+msgid "URL"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:90
+msgid "Pay Button"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:92
+msgid "Controls how the ifthenpay pay button looks on the form itself, not the confirmation screen above."
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:96
+msgid "Payment Method Icons"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:100
+msgid "Hide the row of payment method icons shown above the pay button"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:105
+msgid "Button Text"
+msgstr ""
+
+#. translators: pay button text. Keep the literal {logo} token where the ifthenpay logo should appear, or remove it to show text only.
+#: src/Admin/views/confirmation-settings-tab.php:107
+#: src/Settings/SettingsRepository.php:386
+msgid "Pay with {logo}"
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:109
+msgid "Use {logo} to place the ifthenpay logo inside your own text, e.g. \"Pay here with {logo}\". Leave {logo} out entirely to show text only, with no logo."
+msgstr ""
+
+#: src/Admin/views/confirmation-settings-tab.php:114
+msgid "Preview"
+msgstr ""
+
+#: src/Admin/views/methods-table-rows.php:20
+msgid "No payment methods were found for this Gateway Key."
+msgstr ""
+
+#: src/Admin/views/methods-table-rows.php:62
+msgid "Use as the default payment method"
+msgstr ""
+
+#: src/Admin/views/methods-table-rows.php:64
+msgid "Default payment method"
+msgstr ""
+
+#: src/Admin/views/methods-table-rows.php:82
+msgid "Method Not Activated"
+msgstr ""
+
+#: src/Admin/views/methods-table-rows.php:90
+msgid "Request Activation"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:15
+msgid "ifthenpay Settings"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:17
+msgid "Accept Multibanco, MB WAY, cards, Apple Pay, Google Pay, Cofidis, and Pix through a single ifthenpay Gateway Key, via a secure hosted payment page."
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:24
+msgid "Backoffice Key"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:29
+msgid "Connected"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:31
+msgid "Not configured"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:38
+msgid "Paste the Backoffice Key ifthenpay gave you when your contract was signed. It is stored securely and never shown again once connected."
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:43
+msgid "Connect"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:51
+msgid "Backoffice Key connected."
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:55
+msgid "Disconnect"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:65
+msgid "Gateway Key"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:68
+msgid "— Select —"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:80
+msgid "Every Gateway Key registered on this Backoffice Key."
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:91
+msgid "Payment Methods"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:95
+msgid "Enabled"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:96
+msgid "Default Method"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:97
+msgid "Method"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:98
+msgid "Account"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:114
+msgid "Expiry Days"
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:117
+msgid "Payment links unpaid after this many days are marked expired. 0 disables expiry."
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:122
+msgid "The payment description shown on the ifthenpay hosted page comes from the form's own \"Collect Payment\" action settings (Description field), not from here."
+msgstr ""
+
+#: src/Admin/views/settings-tab.php:126
+msgid "The messages shown after checkout for Payment Received and Payment Pending, and the pay button's icons/text, are configured on the \"Ifthenpay Extras\" tab of Global Settings, not here. Payment Canceled and Payment Failed are never configurable: the payer is always sent back to the form and shown a fixed message."
+msgstr ""
+
+#: src/Ajax/Controller.php:44
+#: src/Ajax/Controller.php:216
+#: src/Ajax/Controller.php:235
+#: src/Ajax/Controller.php:298
+#: src/Ajax/Controller.php:351
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: src/Ajax/Controller.php:50
+msgid "That Backoffice Key could not be validated. Please double-check it and try again."
+msgstr ""
+
+#: src/Ajax/Controller.php:241
+msgid "Please choose a Gateway Key."
+msgstr ""
+
+#: src/Ajax/Controller.php:247
+msgid "Connect a Backoffice Key first."
+msgstr ""
+
+#: src/Ajax/Controller.php:266
+msgid "That Gateway Key could not be found on this Backoffice account."
+msgstr ""
+
+#: src/Ajax/Controller.php:272
+msgid "Could not load the payment methods catalog from ifthenpay. Please try again."
+msgstr ""
+
+#: src/Ajax/Controller.php:307
+msgid "Missing method or Gateway Key."
+msgstr ""
+
+#: src/Ajax/Controller.php:311
+msgid "Activation for this method was already requested recently."
+msgstr ""
+
+#: src/Ajax/Controller.php:330
+msgid "The activation request could not be sent. Please try again."
+msgstr ""
+
+#: src/Ajax/Controller.php:373
+msgid "Settings saved."
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:524
+msgid "Payment canceled by the payer at the ifthenpay hosted page."
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:529
+msgid "ifthenpay reported the payment as failed or incomplete."
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:806
+msgid "Continue in the other tab — you can close this one."
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:807
+msgid "Powered by"
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:966
+msgid "You canceled the payment before it was completed."
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:967
+msgid "Your payment could not be completed. Please try again."
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:1046
+msgid "Close"
+msgstr ""
+
+#: src/Frontend/RedirectHandler.php:1049
+msgid "OK"
+msgstr ""
+
+#: src/Gateway/IfthenpayGateway.php:62
+msgid "ifthenpay is not fully configured yet. Please contact the site administrator."
+msgstr ""
+
+#: src/Gateway/IfthenpayGateway.php:71
+msgid "No ifthenpay payment method is currently enabled. Please contact the site administrator."
+msgstr ""
+
+#: src/Gateway/IfthenpayGateway.php:88
+msgid "Please specify an amount for the payment."
+msgstr ""
+
+#: src/Gateway/IfthenpayGateway.php:130
+#: src/Gateway/IfthenpayGateway.php:143
+msgid "Unable to start the ifthenpay payment. Please try again."
+msgstr ""
+
+#: src/Gateway/IfthenpayGateway.php:468
+msgid "ifthenpay Payment Redirect — do not edit"
+msgstr ""
+
+#. translators: %s: site name.
+#: src/Settings/SettingsRepository.php:142
+#, php-format
+msgid "Payment to %s"
+msgstr ""
+
+#: src/Settings/SettingsRepository.php:241
+msgid "Your payment was received. Thank you!"
+msgstr ""
+
+#: src/Settings/SettingsRepository.php:303
+msgid "Your payment is being confirmed. This can take a few minutes — you will receive a confirmation once it clears."
+msgstr ""

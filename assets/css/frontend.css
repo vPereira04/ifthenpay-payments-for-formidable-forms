@@ -1,0 +1,335 @@
+.iftp-frm-modal[hidden] {
+	display: none !important;
+}
+
+.iftp-frm-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.iftp-frm-modal__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgb(16 24 40 / 60%);
+}
+
+.iftp-frm-modal__box {
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	max-width: 420px;
+	width: calc(100% - 40px);
+	margin: 20px;
+	padding: 32px 28px 24px;
+	border-radius: var(--iftp-radius, 8px);
+	background: var(--iftp-success-bg, #dff0d8);
+	border: 1px solid var(--iftp-success-border, #d6e9c6);
+	color: var(--iftp-success-text, #468847);
+	text-align: center;
+	box-shadow: 0 10px 40px rgb(16 24 40 / 20%);
+	animation: iftp-frm-pop 0.18s ease-out;
+}
+
+.iftp-frm-modal--error .iftp-frm-modal__box {
+	background: var(--iftp-error-bg, #fee4e2);
+	border-color: var(--iftp-error-border, #f5b8aa);
+	color: var(--iftp-error-text, #f04438);
+}
+
+.iftp-frm-modal__icon {
+	margin: 0 auto 12px;
+	width: 32px;
+	height: 32px;
+}
+
+.iftp-frm-modal__message {
+	font-size: 15px;
+}
+
+.iftp-frm-modal__message p {
+	margin: 0 0 10px;
+}
+
+.iftp-frm-modal__message p:last-child {
+	margin-bottom: 0;
+}
+
+.iftp-frm-modal__close {
+	position: absolute;
+	top: 8px;
+	right: 12px;
+	width: 28px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background: none;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+	color: inherit;
+	opacity: 0.6;
+	transition: opacity 0.15s ease, transform 0.15s ease;
+  box-shadow: none !important;
+}
+
+/* No background/border "ball" behind the glyph on hover — just the × itself
+ * growing, tinted to match .iftp-frm-modal__icon's own color (green/red).
+ * Every property here is `!important`: the host theme/plugin stylesheet this
+ * loads alongside has its own `button:hover`/`:focus`/`:active` rule (brand
+ * blue background + white text) that otherwise wins outright — reproduced
+ * and confirmed on a live site, not a hypothetical; `!important` is the only
+ * thing that reliably beats an unknown, unbounded host cascade for a small
+ * self-contained control like this one (same reasoning as `.iftp-frm-modal[hidden]`
+ * above). `outline` is reset the same way, since that stylesheet's "blue" is
+ * a focus ring, not a background. */
+.iftp-frm-modal__close:hover,
+.iftp-frm-modal__close:focus-visible,
+.iftp-frm-modal__close:active {
+	opacity: 1 !important;
+	background: none !important;
+	border: none !important;
+	outline: none !important;
+	color: var(--iftp-success-text, #468847) !important;
+	transform: scale(1.2);
+  box-shadow: none !important;
+}
+
+.iftp-frm-modal--error .iftp-frm-modal__close:hover,
+.iftp-frm-modal--error .iftp-frm-modal__close:focus-visible,
+.iftp-frm-modal--error .iftp-frm-modal__close:active {
+	color: var(--iftp-error-text, #f04438) !important;
+  box-shadow: none !important;
+}
+
+.iftp-frm-modal__close:active {
+	transform: scale(1.05);
+  box-shadow: none !important;
+}
+
+/* Outline style, colored to match whichever box (success/error) this is —
+ * `currentColor`/inherit already resolves to --iftp-success-text or
+ * --iftp-error-text here, so no separate --iftp-accent lookup is needed.
+ * Background matches the box's own tint at rest (blends in); hover/focus
+ * invert to a solid fill (background becomes the text color, text becomes
+ * the bg color); active is that same inverted fill just a touch darker.
+ * Explicit per-status values throughout since an inverted fill can't be
+ * expressed as a `currentColor`/`inherit` swap in plain CSS. Every color
+ * property on the interactive states is `!important` for the same reason as
+ * .iftp-frm-modal__close above — a host `button:hover`/`:focus` rule
+ * otherwise overrides this with a brand-blue background + white text. */
+.iftp-frm-modal__ok {
+	margin-top: 20px;
+	padding: 8px 24px;
+	border: 1px solid currentcolor;
+	border-radius: var(--iftp-radius, 8px);
+	background: var(--iftp-success-bg, #dff0d8);
+	color: inherit;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	transition: background-color 0.15s ease, color 0.15s ease, filter 0.15s ease;
+}
+
+.iftp-frm-modal__ok:hover,
+.iftp-frm-modal__ok:focus-visible {
+	background: var(--iftp-success-text, #468847) !important;
+	border-color: var(--iftp-success-text, #468847) !important;
+	color: var(--iftp-success-bg, #dff0d8) !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.iftp-frm-modal__ok:active {
+	filter: brightness(0.9);
+}
+
+.iftp-frm-modal--error .iftp-frm-modal__ok {
+	background: var(--iftp-error-bg, #fee4e2);
+}
+
+.iftp-frm-modal--error .iftp-frm-modal__ok:hover,
+.iftp-frm-modal--error .iftp-frm-modal__ok:focus-visible {
+	background: var(--iftp-error-text, #f04438) !important;
+	border-color: var(--iftp-error-text, #f04438) !important;
+	color: var(--iftp-error-bg, #fee4e2) !important;
+}
+
+@keyframes iftp-frm-pop {
+	from {
+		transform: scale(0.95);
+		opacity: 0;
+	}
+
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.iftp-frm-modal__box {
+		animation: none;
+	}
+}
+
+/*
+ * Hand-off notice: a transparent-black, full-screen scrim shown on the
+ * *original* page for the brief moment before it closes itself, or — if the
+ * browser won't allow that (assets/js/frontend.js's `handOffToPaymentTab()`)
+ * — left in place as a static "continue in the other tab" notice. This tab
+ * has no further role in the payment; the pre-opened payment tab is the one
+ * that shows the outcome once ifthenpay sends it back. Deliberately NOT
+ * themed with the merchant's form colors, unlike .iftp-frm-modal above —
+ * it's a transient hand-off state, not a payment outcome the merchant's own
+ * form-style success/error colors are meant to represent.
+ */
+.iftp-frm-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	background: rgb(0 0 0 / 82%);
+	color: #fff;
+	font-size: 15px;
+	line-height: 1.5;
+	text-align: center;
+	overflow: hidden;
+}
+
+.iftp-frm-overlay__text {
+	margin: 0;
+	padding: 0 24px;
+	max-width: 360px;
+}
+
+.iftp-frm-overlay__brand {
+	position: absolute;
+	bottom: 28px;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 12px;
+	color: rgb(255 255 255 / 60%);
+}
+
+.iftp-frm-overlay__brand img {
+	height: 18px;
+	width: auto;
+	display: block;
+}
+
+/*
+ * Payment-method block (PaymentSelector.php), rendered at
+ * `frm_before_submit_btn` — structurally similar to Formidable's own bundled
+ * PayPal module's row-list layout (bordered container, icon-row column with
+ * fixed-height/auto-width/spaced icons) without reusing its actual CSS
+ * classes, since PayPal's own JS queries some of those class names directly
+ * and a same-named-but-foreign row could confuse it. ifthenpay is always the
+ * pre-selected/only method here (no radio to choose it — see
+ * PaymentSelector::render()), so this is an informational badge + a "Pay"
+ * button, not a choice; assets/js/frontend.js still watches for the payer
+ * picking a *different* method elsewhere on the form (e.g. Formidable's own
+ * Card/PayPal row) and hides this block's button in that case. Colored with
+ * the merchant's own form-style colors (the same ones .iftp-frm-modal above
+ * uses) via the inline `style` attribute PaymentSelector::render() outputs,
+ * not hardcoded like PayPal's blue.
+ */
+.iftp-frm-method-block {
+	max-width: 500px;
+	margin: 16px 0;
+}
+
+.iftp-frm-method-block[hidden] {
+	display: none !important;
+}
+
+.iftp-frm-method-selector {
+	border: 1px solid #e0e0e0;
+	border-radius: var(--iftp-radius, 8px);
+	overflow: hidden;
+}
+
+.iftp-frm-method-option {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+}
+
+.iftp-frm-method-marks {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+}
+
+.iftp-frm-method-mark {
+	height: 24px;
+	width: auto;
+	display: block;
+}
+
+.iftp-frm-method-action {
+	margin-top: 12px;
+}
+
+.iftp-frm-method-action[hidden] {
+	display: none !important;
+}
+
+.iftp-frm-pay-button {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 11px 16px;
+	border: 1px solid var(--iftp-accent, #4199fd);
+	border-radius: var(--iftp-radius, 8px);
+	background: var(--iftp-accent, #4199fd);
+	color: var(--iftp-accent-text, #fff);
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 1;
+	cursor: pointer;
+	transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.iftp-frm-pay-button__text {
+	white-space: nowrap;
+}
+
+.iftp-frm-pay-button__logo {
+	height: 18px;
+	width: auto;
+	display: block;
+  margin-top: 3px;
+}
+
+.iftp-frm-pay-button:hover {
+	background: var(--iftp-accent-hover, #3680d3);
+}
+
+.iftp-frm-pay-button:active {
+	transform: scale(0.99);
+}
+
+.iftp-frm-pay-button:focus-visible {
+	outline: 2px solid var(--iftp-accent, #4199fd);
+	outline-offset: 2px;
+}

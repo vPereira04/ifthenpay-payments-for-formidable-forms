@@ -1,0 +1,52 @@
+<?php
+/**
+ * Fires when the plugin is deleted via the WordPress admin.
+ *
+ * @package Ifthenpay\Formidable
+ */
+
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+	exit;
+}
+
+function ifthenpay_frm_uninstall() {
+	$options = array(
+		'frm_ifthenpay_backoffice_key',
+		'frm_ifthenpay_gateway_key',
+		'frm_ifthenpay_methods',
+		'frm_ifthenpay_default_method',
+		'frm_ifthenpay_expiry_days',
+		'frm_ifthenpay_msg_success',
+		'frm_ifthenpay_msg_pending',
+		'frm_ifthenpay_mode_success',
+		'frm_ifthenpay_mode_pending',
+		'frm_ifthenpay_url_success',
+		'frm_ifthenpay_url_pending',
+		'frm_ifthenpay_disable_method_icons',
+		'frm_ifthenpay_button_text',
+	);
+
+	foreach ( $options as $option ) {
+		delete_option( $option );
+	}
+
+	global $wpdb;
+
+	// I clean up this plugin's own markers/transients here, but leave the
+	// shared wp_frm_payments records alone — that's Formidable's own data,
+	// same as every other gateway sharing that table.
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name, not user input; every LIKE value is escaped via esc_like() and passed through prepare().
+	$wpdb->query(
+		$wpdb->prepare(
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s",
+			$wpdb->esc_like( 'frm_ifthenpay_redirect_action_' ) . '%',
+			$wpdb->esc_like( '_transient_frm_ifthenpay_redirect_' ) . '%',
+			$wpdb->esc_like( '_transient_timeout_frm_ifthenpay_redirect_' ) . '%',
+			$wpdb->esc_like( '_transient_frm_ifthenpay_context_' ) . '%',
+			$wpdb->esc_like( '_transient_timeout_frm_ifthenpay_context_' ) . '%',
+			$wpdb->esc_like( '_transient_frm_ifthenpay_activation_requested_' ) . '%',
+			$wpdb->esc_like( '_transient_timeout_frm_ifthenpay_activation_requested_' ) . '%'
+		)
+	);
+}
+ifthenpay_frm_uninstall();

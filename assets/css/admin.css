@@ -1,0 +1,404 @@
+/*
+ * ifthenpay Payments for Formidable Forms — Global Settings "ifthenpay" tab.
+ *
+ * Reuses Formidable's own admin classes wherever they already existed
+ * (.form-table, .frm-card-item, .frm-flex-col, .frm-meta-tag, .frm-card-bottom,
+ * .button-secondary.frm-button-secondary, .wp-list-table.widefat.striped) —
+ * everything below is strictly additive, for the handful of things Formidable's
+ * own markup has no equivalent for: per-method-row provisioned state, the
+ * methods table's control-column layout, and the default-method star toggle.
+ */
+
+.iftp-frm-error {
+	color: #d63638;
+	margin-left: 10px;
+}
+
+/* ---- Methods table: control-column layout (blueprint §8, Default Method Selector) ---- */
+
+table.iftp-frm-methods-table {
+	width: auto;
+	max-width: 650px;
+}
+
+.iftp-frm-methods-table th,
+.iftp-frm-methods-table td {
+	vertical-align: middle;
+}
+
+.iftp-frm-col-control {
+	width: 1%;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.iftp-frm-col-enabled {
+	border-right: 1px solid #dcdcde;
+}
+
+/* The star toggle itself is a small icon (see .iftp-frm-method-star below) —
+ * gives it 10px of breathing room on each side instead of sitting flush
+ * against the Enabled column and the Method column. `.widefat td { padding:
+ * 8px 10px }` (WP core, wp-admin/css/common.css) is a class+type selector,
+ * same specificity tier as a bare `.iftp-frm-col-default` class selector but
+ * loaded first — on a tie the later stylesheet should win, but in practice
+ * something in this cascade was still zeroing it out, so both the selector
+ * (table+class+type+class) and `!important` are used here to settle it for
+ * good regardless of load order. */
+table.iftp-frm-methods-table td.iftp-frm-col-default {
+	padding-left: 30px !important;
+	padding-right: 30px !important;
+}
+
+.iftp-frm-col-method,
+.iftp-frm-col-account {
+	text-align: left;
+}
+
+/* The logo (inline-flex) and label (inline span) are two separate inline-level
+ * boxes on the same line by default — without this, squeezing the table's
+ * overall width (see the max-width cap above) gave the browser room to
+ * "solve" the squeeze by wrapping the label onto its own line under the
+ * logo instead of growing the column, which is never what we want here. */
+.iftp-frm-col-method {
+	white-space: nowrap;
+	padding-right: 20px;
+}
+
+/* Account is a short, roughly fixed-width value (the account pill) — shrink
+ * it to content like the control columns, instead of letting the browser's
+ * auto table layout split the table's leftover width evenly between it and
+ * Method. That's what was pushing Method and Account far apart even after
+ * capping the table's own max-width above. */
+.iftp-frm-col-account {
+	width: 1%;
+	white-space: nowrap;
+	padding-left: 32px;
+}
+
+.iftp-frm-methods-empty-row td {
+	padding: 16px;
+	color: #646970;
+	font-style: italic;
+}
+
+/* ---- Method logo slot ----
+ * Fixed-width, centered slot so every row's label starts at the same x
+ * position regardless of the per-method logo's shape. max-width is capped
+ * to the widest real-world mark (the combined card-network mark is ~3x
+ * wider than the square MB/MB WAY marks) so raising max-height for the
+ * narrower marks never also enlarges the one already big enough.
+ */
+.iftp-frm-logo-wrap {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 54px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.iftp-frm-logo {
+	max-height: 24px;
+	max-width: 54px;
+	width: auto;
+	height: auto;
+}
+
+.iftp-frm-method-label {
+	vertical-align: middle;
+	font-weight: 500;
+}
+
+/* ---- Account pill ----
+ * Uniform height/line-height/padding so every row's account code lines up,
+ * instead of an unstyled <code> tag whose box varies with content length.
+ */
+.iftp-frm-account-pill {
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 10px;
+	background: #f0f0f1;
+	border-radius: 12px;
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+}
+
+/* ---- Unprovisioned row dimming ----
+ * Applies to the label/status text only, never to the Request Activation
+ * button, which must stay a fully legible call to action.
+ */
+.iftp-frm-method-row--unprovisioned .iftp-frm-method-label,
+.iftp-frm-method-row--unprovisioned .iftp-frm-status--off {
+	opacity: 0.5;
+}
+
+/* Label and Request Activation button sit on one line, vertically centered
+ * within the row — not stacked, which previously read as sitting closer to
+ * the top of the cell than the middle. */
+.iftp-frm-status-cell {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	min-height: 100%;
+}
+
+.iftp-frm-status--ok {
+	color: #007017;
+	font-weight: 600;
+}
+
+.iftp-frm-status--off {
+	margin-right: 8px;
+}
+
+/* Sized down to match the account pill's own height/font-size instead of
+ * WP core's larger default .button-secondary sizing. */
+.iftp-frm-activate-btn {
+	opacity: 1;
+	height: 24px;
+	line-height: 22px;
+	padding: 0 10px;
+	font-size: 12px;
+}
+
+/* ---- Default Method star toggle ---- */
+
+.iftp-frm-method-star {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.iftp-frm-method-star-input:disabled + .iftp-frm-method-star,
+.iftp-frm-method-star--hidden {
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.iftp-frm-star-icon {
+	font-size: 15px;
+	line-height: 1;
+	color: #dcdcde;
+	transition: color 0.15s ease;
+}
+
+.iftp-frm-method-star-input:checked + .iftp-frm-method-star .iftp-frm-star-icon {
+	color: #dba617;
+}
+
+/* JS-driven "wink" animation, re-triggerable on repeated clicks of the same
+ * state (a CSS-only :checked transition can't replay without the class
+ * being removed/re-added by JS — see assets/js/admin.js). */
+@media (prefers-reduced-motion: no-preference) {
+	.iftp-frm-star-icon.iftp-frm-star-wink {
+		animation: iftp-frm-star-wink 0.4s ease;
+	}
+}
+
+@keyframes iftp-frm-star-wink {
+	0% {
+		transform: scale( 1 ) rotate( 0deg );
+		text-shadow: 0 0 0 rgb( 219 166 23 / 0% );
+	}
+
+	40% {
+		transform: scale( 1.35 ) rotate( -15deg );
+		text-shadow: 0 0 9px rgb( 255 199 44 / 95% );
+	}
+
+	70% {
+		transform: scale( 0.95 ) rotate( 8deg );
+		text-shadow: 0 0 5px rgb( 255 199 44 / 60% );
+	}
+
+	100% {
+		transform: scale( 1 ) rotate( 0deg );
+		text-shadow: 0 0 0 rgb( 219 166 23 / 0% );
+	}
+}
+
+.iftp-frm-methods-loading {
+	padding: 16px;
+	color: #646970;
+	font-style: italic;
+}
+
+/* ---- Reveal chain: Backoffice Key → Gateway Key → Payment Methods/Expiry
+ * Days ----
+ * Each step of assets/js/admin.js's connect/select flow un-hides the next
+ * one with this class rather than snapping it straight into view. */
+@media (prefers-reduced-motion: no-preference) {
+	.iftp-frm-reveal-in {
+		animation: iftp-frm-reveal-in 0.25s ease-out;
+	}
+}
+
+@keyframes iftp-frm-reveal-in {
+	from {
+		opacity: 0;
+		transform: translateY( -6px );
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY( 0 );
+	}
+}
+
+/* ---- Payments-tab pill (assets/js/admin.js injects this into Formidable's
+ * own `.frm-long-icon-buttons` row, alongside PayPal/Stripe/Square) ----
+ * Height fixed, width auto — preserves the ifthenpay mark's own aspect
+ * ratio instead of squashing/stretching it to match the other brands' logos.
+ */
+.iftp-frm-pill-logo {
+	height: 22px;
+	width: auto;
+}
+
+/* Formidable sizes each of its own 3 built-in pills at a fixed 33% width.
+ * With a 4th (ifthenpay) pill inserted, redistribute evenly instead of
+ * overflowing the row. `:has()` is supported by every evergreen browser WP
+ * admin targets; without it the pills simply flex-shrink to fit instead of
+ * wrapping, which still reads correctly, just slightly more cramped.
+ */
+.frm-long-icon-buttons:has( .iftp-frm-payment-tab ) > label {
+	width: calc( 25% - var( --gap-sm ) );
+}
+
+/* ---- Popup Messages: Show Message / Redirect to URL / Open in a New Tab
+ * mode picker ----
+ * Deliberately mirrors Formidable's own native On Submit "Confirmation"
+ * picker (bordered, radio-selectable boxes in a row) for visual consistency
+ * with the screen it sits right next to — own inline SVGs, not Formidable's
+ * private sprite (see settings-tab.php's own comment on this). Icon and
+ * label sit side by side within each box, not stacked.
+ */
+.iftp-frm-outcome-mode {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 8px;
+	max-width: 740px;
+}
+
+.iftp-frm-outcome-box {
+	position: relative;
+	flex: 1 1 0;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 26px 18px;
+	border: 2px solid #dcdcde;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	color: #1d2327;
+	line-height: 1;
+	white-space: nowrap;
+	transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.iftp-frm-outcome-box:hover {
+	border-color: #8c8f94;
+}
+
+/* Visually hidden but still focusable/announced — clicking anywhere in the
+ * box selects it via the native <label> wrapping the input; no visible
+ * radio dot, matching the reference design. */
+.iftp-frm-outcome-box input[type="radio"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect( 0, 0, 0, 0 );
+	white-space: nowrap;
+	border: 0;
+}
+
+.iftp-frm-outcome-box__icon {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	align-self: center;
+}
+
+/* Belt-and-braces against any broader admin reset that targets bare `svg`
+ * elements (a common `img, svg { max-width: 100%; height: auto }`-style
+ * rule would blow this icon up to the box's full width, forcing the label
+ * onto its own line below it instead of sitting beside it). */
+.iftp-frm-outcome-box__icon svg {
+	display: block;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+
+.iftp-frm-outcome-box__label {
+	display: inline-flex;
+	align-items: center;
+	align-self: center;
+}
+
+.iftp-frm-outcome-box:has( input:checked ) {
+	border-color: #2271b1;
+	color: #2271b1;
+}
+
+.iftp-frm-outcome-box:has( input:focus-visible ) {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}
+
+/* Message/URL field wrappers — always block-level so Message stacks above
+ * URL (never side by side) when "Open in a New Tab" shows both at once. */
+.iftp-frm-outcome-field {
+	display: block;
+	max-width: 740px;
+	margin-top: 8px;
+}
+
+.iftp-frm-outcome-field__label {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #646970;
+}
+
+/* ---- Per-form "Collect Payment" action editor ----
+ * Currency locked to EUR while ifthenpay is the selected gateway (JS —
+ * assets/js/admin.js's syncCurrencyLock()). Not `disabled`, so its value
+ * still submits with the rest of the form — locked visually and by
+ * re-forcing the value back on any change instead.
+ */
+.iftp-frm-currency-locked {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+/* ---- "Ifthenpay Extras" tab: Pay Button preview ----
+ * Reuses frontend.css's own .iftp-frm-pay-button classes so the preview can
+ * never visually drift from the real button — only this wrapper (non-
+ * interactive: `pointer-events: none`, no hover/active states apply) and the
+ * fixed width (form-table has no natural width cap for a `<button>` cell) are
+ * specific to this admin context.
+ */
+.iftp-frm-extra-preview {
+	max-width: 320px;
+	cursor: default;
+	pointer-events: none;
+}
